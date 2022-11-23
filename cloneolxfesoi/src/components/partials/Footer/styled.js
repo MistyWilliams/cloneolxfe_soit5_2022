@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 
-export const HeaderArea = styled.div`
+export const FooterArea = styled.div`
    height:100px;
-   background-color: #ccc; 
+   background-color: #ccc;
+
+`
