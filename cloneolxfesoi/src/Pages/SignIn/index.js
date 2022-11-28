@@ -1,6 +1,10 @@
-import React, { useState } from 'react'
-import { PageArea } from './styled'
-import { PageContainer, PageTitle } from '../../components/MainComponents'
+import React, { useState } from 'react';
+import { PageArea } from './styled';
+import { 
+    PageContainer,
+    PageTitle,
+    ErrorMessage
+} from '../../components/MainComponents';
 import useApi from '../..helpers/OlxAPI'
 import { dologin } from "../../helpers/AuthHandler"
 
@@ -11,18 +15,21 @@ const Page = () => {
     const [password, setPassword] = useState('')
     const [remenberPassword, setRemenberPassword] = useState(false)
     const [disabled, setDisabled] = useState(false)
+    const [error, setError] = useState('')
 
     
-    
     const handleSubmit = async (e) => {
-        e.preventDefault()
-        const json = await api.login(email, password)
-        if(jason.error) {
-            setError(json.error)
+        e.preventDefault();
+        setDisabled(true);
+        setError('');
+        const json = await api.login(email, password);
+        if (jason.error) {
+            setError(json.error);
         } else {
-            dologin(json.token, remenberPassword)
-            Window.location.href = '/'
+            dologin(json.token, remenberPassword);
+            Window.location.href = '/';
         }
+        setDisabled(false);
     }
 
     return (
@@ -31,13 +38,24 @@ const Page = () => {
                 Login
             </PageTitle>
             <PageArea>
+                {error &&
+                 <ErrorMessage>
+                    {error}
+                 </ErrorMessage>
+                }
                 <form onSubmit={handleSubmit}>
                     <label className="area">
                         <div className="area--title">
                         E-mail
                         </div>
                         <div className="area--input">
-                         <imput type="email" disabled={disabled} />
+                         <imput 
+                          type="email"
+                          disabled={disabled}
+                          value={email}
+                          onChange={e => setEmail(e.target.value)}
+                          required
+                          />
                          </div>
                         </label>
                         <label className="area">
@@ -45,7 +63,13 @@ const Page = () => {
                          Senha
                         </div>
                         <div className="area--input">
-                            <input type="password" disabled={disabled} />
+                            <input 
+                            type="password" 
+                            disabled={disabled} 
+                            value={password}
+                            onChange={e => setPassword(e.target.value)}
+                            required
+                            />
                         </div>
                     </label>
                     <label className="area">
@@ -53,15 +77,19 @@ const Page = () => {
                          Lembrar Senha
                         </div>
                         <div className="area--input">
-                            <imput type="checkbox" />
+                            <input 
+                            type="check" 
+                            disabled={disabled} 
+                            checked={remenberPassword}
+                            onChange={() => setRemenberPassword(!remenberPassword)}
+                            />
                         </div>
                     </label>
                     <label className="area">
                         <div className="area--title">
-                         <button disabled={disabled}>Fazer Login</button>
-                        </div>
+                        </div>   
                         <div className="area--input">
-                            <imput type="password" />
+                         <button disabled={disabled}>Fazer Login</button>
                         </div>
                     </label>
                 </form>

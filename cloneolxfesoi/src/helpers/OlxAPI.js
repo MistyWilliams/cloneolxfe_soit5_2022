@@ -1,9 +1,67 @@
+import Cookies from 'js-cookie';
+import qs from 'qs';
 
-const OlxAPI = {
-    login: async (email, password) => {
-        //fazer consulta BK
-        return {}
+const BASEAPI = '';
+
+const apiFetchPost = async (endpoint, body) => {
+    if(!body.token) {
+        let token = Cookies.get('token');
+        if (token) {
+            body.token = token;
+        }
     }
+    const res = await fetch(BASEAPI + endpoint, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-type': 'application/json'        
+        },
+        body: JSON.stringify(body)
+    });
+    const json = await res.json();
+    if (json.notallowed) {
+      window.location.href = '/signin';
+      return;
+    }
+    return json;
 }
 
-export default () => OlxAPI
+const apiFetchGet = async (endpoint, body =  []) => {
+    if(!body.token) {
+        let token = Cookies.get('token');
+        if (token) {
+            body.token = token;
+        }
+    }
+    const res = await fetch('${BASEAPI + endpoint}?${qs.stringify{body}');
+    const json = await res.json();
+    if (json.notallowed) {
+      window.location.href = '/signin';
+      return;
+    }
+    return json;
+} 
+    
+const OlxAPI = {
+    login: async (email, password) => {
+        const json = await apiFetchPost('user/signin', { email, password});
+        return json;
+    },
+
+    register: async (name, stateLoc, emai, password) => {
+        const json = await apiFetchPost('user/signup', {
+            name, 
+            state: stateLoc,
+            email,
+            password
+    });
+    return jason;
+},
+
+getState: async () => {
+    const json = await apiFetchGet('/states');
+    return json.states;
+ }
+}
+
+export default () => OlxAPI;

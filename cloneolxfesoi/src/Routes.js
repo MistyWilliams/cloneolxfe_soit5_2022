@@ -1,19 +1,20 @@
-import React from 'react'
-import { Routes, Route } from 'react-router-dom'
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
 
-import Home from './pages/Home'
-import About from './pages/About'
-import NotFound from './pages/NotFound'
-import Signin from './pages/Signin'
+import Home from './pages/Home';
+import About from './pages/About';
+import NotFound from './pages/NotFound';
+import SignIn from './pages/SignIn';
+import SignUp from './pages/SignUp';
 
 export default () => {
    return (
     <Routes>
-        <Route exact  path="/" element={<Home />} />
-        <Route exact  patch="/about" element={<about />} />
-        <Route exact  patch="/signin" element={<Signin />} />
-        <Route path='*'element={<notFound />} />
+        <Route exact path="/" element={<Home />} />
+        <Route exact patch="/about" element={<About />} />
+        <Route exact patch="/signin" element={<SignIn />} />
+        <Route exact path="/signup" element={<SignUp />} />
+        <Route path='*'element={<NotFound />} />
     </Routes>
-
    )
 }

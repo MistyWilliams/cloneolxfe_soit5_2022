@@ -43,15 +43,40 @@ export const HeaderArea = styled.div`
          list-style: none;
       }
 
-      ul{
+      ul {
          display: flex;
          align-items: center;
          height: 40px;
       }
 
-      li{
+      li {
          margin-left: 20px;
          margin-right:20px;
+
+         a, button {
+            color: #000;
+            font-size: 14px;
+            border: 0;
+            background: none;
+            text-decoration: none;
+            cursor: pointer;
+            outline: none;oc
+
+            &.hover {
+                color:#999;
+            }
+
+            &.button {
+               background-color: #ff8100;
+               border-radius: 4px;
+               color: #FFF;
+               padding: 5px 10px;
+            }
+
+            &.button:hover {
+                background-color: #E57706;
+            }
+         }
       }
    }
 
