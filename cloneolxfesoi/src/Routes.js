@@ -9,7 +9,7 @@ import SignUp from './pages/SignUp';
 
 export default () => {
    return (
-    <Routes>
+    <Routes>   
         <Route exact path="/" element={<Home />} />
         <Route exact patch="/about" element={<About />} />
         <Route exact patch="/signin" element={<SignIn />} />
