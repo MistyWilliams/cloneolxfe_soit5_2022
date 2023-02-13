@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { PageArea, SearchArea } from './styled';
-import { PageContainer, ErrorMessage } from '../../components/MainComponents';
+import { PageContainer } from '../../components/MainComponents';
 import AdItem from '../../components/partials/AdItem';
 import useApi from '../../helpers/OlxAPI';
 
@@ -76,7 +76,7 @@ const Page = () => {
             </SearchArea>
             <PageContainer>
                 <PageArea>
-                  <h2>Anúcios Recentes</h2>
+                  <h2>Anúncios Recentes</h2>
                     <div className="list">
                         {adList.map((i, k) =>
                             <AdItem key={k} data={i} />

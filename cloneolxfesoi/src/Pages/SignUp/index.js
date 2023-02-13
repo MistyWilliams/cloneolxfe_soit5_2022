@@ -32,7 +32,7 @@ const Page = () => {
         e.preventDefault();
         setDisabled(true);
         setError('');
-        if (password != confirmPassword) {
+        if (password !== confirmPassword) {
             setError('Senhas não batem');
             setDisabled(false);
             return;

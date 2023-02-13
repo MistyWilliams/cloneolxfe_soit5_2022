@@ -1,20 +1,34 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 
 import Home from './pages/Home';
 import About from './pages/About';
 import NotFound from './pages/NotFound';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
+import AdPage from './pages/AdPage';
 
 export default () => {
    return (
-    <Routes>   
-        <Route exact path="/" element={<Home />} />
-        <Route exact patch="/about" element={<About />} />
-        <Route exact patch="/signin" element={<SignIn />} />
-        <Route exact path="/signup" element={<SignUp />} />
-        <Route path='*'element={<NotFound />} />
-    </Routes>
+    <Switch>   
+           <Route exact path="/">
+               <Home />
+            </Route>   
+           <Route exact patch="/about">
+               <About />
+           </Route>
+           <Route exact patch="/signin">
+               <SignIn />
+           </Route>
+        <Route exact path="/signup">
+              <SignUp />
+           </Route>    
+        <Route exact path="/ad/:id">
+               <AdPage />
+           </Route>        
+        <Route path='*'>
+             <NotFound />
+           </Route>
+           </Switch>
    )
 }

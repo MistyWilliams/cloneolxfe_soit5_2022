@@ -6,7 +6,7 @@ import {
     ErrorMessage
 } from '../../components/MainComponents';
 import useApi from '../..helpers/OlxAPI'
-import { dologin } from "../../helpers/AuthHandler"
+import { doLogin } from "../../helpers/AuthHandler"
 
 const Page = () => {
     const api = useApi()
@@ -23,10 +23,10 @@ const Page = () => {
         setDisabled(true);
         setError('');
         const json = await api.login(email, password);
-        if (jason.error) {
+        if (json.error) {
             setError(json.error);
         } else {
-            dologin(json.token, remenberPassword);
+            doLogin(json.token, remenberPassword);
             Window.location.href = '/';
         }
         setDisabled(false);

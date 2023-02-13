@@ -68,7 +68,7 @@ getState: async () => {
         '/categories'
     );
     return json.categories;
-    },
+ },
  
     getAds: async (options) => {
         const json = await apiFetchGet(

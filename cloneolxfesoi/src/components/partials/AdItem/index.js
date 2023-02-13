@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Item } from './styled'
+import { Item } from './styled';
 
 export default (props) => {
     let price = '';
