@@ -41,7 +41,26 @@ const apiFetchGet = async (endpoint, body =  []) => {
     }
     return json;
 } 
-    
+
+const apiFetchFile = async (endpoint, body) => {
+    if (!body.token) {
+        let token = Cookies.get('token');
+        if (token) {
+            body.append("token", token);
+        }
+    }
+    const res = await fetch(BASEAPI + endpoint, {
+        method: 'POST',
+        body
+    });
+    const data = await res.json();
+    if (data.notallowed) {
+        window.location.href = '/signin';
+        return;
+    }
+    return data;
+} 
+
 const OlxAPI = {
     login: async (email, password) => {
         const json = await apiFetchPost('user/signin', { email, password});
@@ -63,10 +82,8 @@ getState: async () => {
     return json.states;
  },
 
- getCategorias: async () => {
-    const json = await apiFetchGet(
-        '/categories'
-    );
+ getCategories: async () => {
+    const json = await apiFetchGet('/categories');
     return json.categories;
  },
  
@@ -74,8 +91,24 @@ getState: async () => {
         const json = await apiFetchGet(
             '/ad/list',
             options
+        ); 
+        return json;
+    },
+
+    getAd: async (id, otherAds = false) => {
+        const json = await apiFetchGet(
+            '/ad/item',
+            { id, otherAds }
         );
         return json;
+    },
+
+    addAd: async (FormData) => {
+        const response = apiFetchFile(
+            '/ad/add',
+            FormData
+        );
+        return response;
     }
  }
 

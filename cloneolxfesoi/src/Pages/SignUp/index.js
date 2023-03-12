@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { PageArea } from './styled';
 import { 
     PageContainer,
@@ -43,7 +43,7 @@ const Page = () => {
         email,
         password
        );
-        if (jason.error) {
+        if (json.error) {
             setError(json.error);
         } else {
             dologin(json.token);
@@ -72,8 +72,8 @@ const Page = () => {
                          <input 
                           type="text"
                           disabled={disabled}
-                          value={email}
-                          onChange={e => setEmail(e.target.value)}
+                          value={name}
+                          onChange={e => setName(e.target.value)}
                           required
                           />
                         </div>
@@ -109,8 +109,8 @@ const Page = () => {
                             <input 
                             type="email" 
                             disabled={disabled} 
-                            value={password}
-                            onChange={e => setPassword(e.target.value)}
+                            value={email}
+                            onChange={e => setEmail(e.target.value)}
                             required
                             />
                         </div>
